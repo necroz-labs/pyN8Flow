@@ -1,80 +1,53 @@
-# python_vorlage
+# 🚀 pyN8Flow
 
-A template for Python projects.
+**Define n8n workflows, the Pythonic way.**
 
-## Features
+pyN8Flow is a Python library that allows you to create, configure, and manage your n8n workflows entirely from Python code. Say goodbye to manual JSON editing and hello to programmatic, version-controllable, and reusable workflow definitions.
 
-*   Feature 1
-*   Feature 2
-*   Feature 3
+## ✨ Core Features
 
-## Folder Structure
+*   **Python-First Workflow Definition**: Use intuitive Python classes to define your n8n nodes and their parameters.
+*   **Fluent Connection Chaining**: Easily connect nodes to build complex workflows.
+*   **Automatic JSON Generation**: The library handles the serialization of your Python objects into the n8n-compatible JSON format.
+*   **Version Control Friendly**: Manage your workflows in Git with clean, human-readable Python code.
+*   **IDE Support**: Leverage autocompletion, type checking, and other IDE features to build workflows faster and with fewer errors.
 
+## 💡 Example Usage
+
+Here's a sneak peek at how you could define a simple workflow with `pyN8Flow`:
+
+```python
+from pyn8flow import Workflow, Node
+
+# 1. Create a new workflow
+wf = Workflow(name="My Awesome Python-Defined Workflow")
+
+# 2. Define the nodes
+start_node = Node(node_type="n8n-nodes-base.start")
+http_node = Node(
+    node_type="n8n-nodes-base.httpRequest",
+    parameters={"url": "https://api.example.com/data"}
+)
+code_node = Node(
+    node_type="n8n-nodes-base.code",
+    parameters={"jsCode": "return item;"}
+)
+
+# 3. Add and connect the nodes
+wf.chain(start_node, http_node, code_node)
+
+# 4. Generate and save the n8n JSON
+wf.save("my_awesome_workflow.json")
+
+print("Workflow created successfully!")
 ```
-.gitignore
-.gitlab-ci.yml
-CHANGELOG.md
-CONTRIBUTING.md
-LICENSE
-README.md
-docs/
-examples/
-poetry.lock
-pyproject.toml
-requirements.txt
-src/
-└── template-python
-    ├── api
-    ├── core
-    ├── model
-    └── utils
-tests/
-```
 
-*   **src/**: Contains the source code of the project.
-*   **tests/**: Contains the tests for the project.
-*   **docs/**: Contains the documentation for the project.
-*   **examples/**: Contains examples of how to use the project.
-*   **...**
+## 🔭 Vision
 
-## Getting Started
+The vision for `pyN8Flow` is to become the go-to tool for n8n power users and teams who want to apply software engineering best practices to their workflow automation pipelines. Future plans include:
 
-### Prerequisites
+*   Direct integration with the n8n API for instant deployment.
+*   A registry of reusable workflow components and patterns.
+*   Advanced tools for workflow validation and testing.
 
-*   Python 3.12
-*   Poetry
-
-### Installation
-
-1.  Clone the repo
-    ```sh
-    git clone https://example.com/your_username/python_vorlage.git
-    ```
-2.  Install dependencies
-    ```sh
-    poetry install
-    ```
-
-## Usage
-
-Use this space to show useful examples of how your project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-
-Don't forget to give the project a star! Thanks again!
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-See `CONTRIBUTING.md` for more information.
-
-## License
-
-Distributed under the Apache License 2.0. See `LICENSE` for more information.
+---
